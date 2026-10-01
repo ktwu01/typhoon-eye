@@ -12,7 +12,7 @@ Drag to look around, scroll to zoom. The panel controls time of day, sun directi
 
 The interface is in English by default. Switch to Chinese from the Language menu in the panel, or with `?lang=zh`; the choice is remembered.
 
-Sound is enabled by default: directional waterspout roars, wind lulls, hull impacts, creaking metal, and delayed thunder tied to lightning. If the browser blocks autoplay, clicking the scene or pressing a key starts the sound. Mute and volume are available at the bottom left; preferences are remembered. Audio pauses while the tab is hidden. All sounds are synthesized locally with Web Audio, with no audio downloads or extra dependencies.
+The loading screen asks whether to play with sound: directional waterspout roars, wind lulls, hull impacts, creaking metal, and delayed thunder tied to lightning. The choice can be made while the scene is still loading. Mute and volume sit at the top right above the scene controls; preferences are remembered. Audio pauses while the tab is hidden. All sounds are synthesized locally with Web Audio, with no audio downloads or extra dependencies.
 
 ## Run locally
 

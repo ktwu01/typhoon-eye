@@ -165,11 +165,18 @@ export function createStormAudio(spoutPositions) {
     wall = loop(brown, 'lowpass', 190);
     wind = loop(white, 'bandpass', 620, 0.6);
     sea = loop(white, 'lowpass', 1100);
-    funnels = spoutPositions.map((position, i) => ({
-      position,
-      body: loop(brown, 'bandpass', 150 + i * 33, 1.3),
-      hiss: loop(white, 'bandpass', 800 + i * 180, 0.9),
-    }));
+    funnels = [];
+  }
+
+  // Sound can be switched on from the loading screen, before the waterspouts exist.
+  function addFunnels() {
+    for (let i = funnels.length; i < spoutPositions.length; i++) {
+      funnels.push({
+        position: spoutPositions[i],
+        body: loop(brown, 'bandpass', 150 + i * 33, 1.3),
+        hiss: loop(white, 'bandpass', 800 + i * 180, 0.9),
+      });
+    }
   }
 
   async function enable() {
@@ -199,6 +206,7 @@ export function createStormAudio(spoutPositions) {
     listener = { x: camera.position.x, y: camera.position.y, z: camera.position.z,
       rightX: matrix[0], rightZ: matrix[2] };
     if (!enabled || context.state !== 'running') return;
+    if (funnels.length < spoutPositions.length) addFunnels();
     const now = context.currentTime;
     if (now - lastUpdate < 0.05) return;
     lastUpdate = now;

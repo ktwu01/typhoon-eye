@@ -10,6 +10,11 @@ import { createPost } from './post.js';
 import { createGui, params } from './gui.js';
 import { createStormAudio } from './audio.js';
 import { createAudioControls } from './audio-controls.js';
+import { createIntro } from './intro.js';
+
+const spoutPositions = [];
+const audio = createStormAudio(spoutPositions);
+const intro = createIntro(audio);
 
 function start() {
   const renderer = new THREE.WebGLRenderer({ antialias: false, powerPreference: 'high-performance' });
@@ -30,9 +35,9 @@ function start() {
   clouds.uniforms.uSpouts.value = spouts.anchors;
   scene.add(clouds.backdrop, ocean.mesh, spouts.group);
 
-  const audio = createStormAudio(spouts.group.children.map((mesh) => mesh.position));
-  void audio.enable();
-  createAudioControls(audio);
+  spoutPositions.push(...spouts.group.children.map((mesh) => mesh.position));
+  const hud = document.getElementById('hud');
+  createAudioControls(audio, hud);
   const lightning = createLightning(shared, audio.strike);
   const look = createLookControls(camera, renderer.domElement, { yaw: 0.06, pitch: 0.3 });
   const post = createPost(renderer, scene, camera);
@@ -46,7 +51,7 @@ function start() {
     spouts.setCount(params.spouts);
     renderer.toneMappingExposure = params.exposure;
   }
-  createGui(applyParams);
+  createGui(applyParams, hud);
   applyParams();
 
   function resize() {
@@ -80,7 +85,7 @@ function start() {
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
-  document.getElementById('loading').classList.add('done');
+  intro.ready();
 }
 
 // Let the loading message paint before the noise bake blocks the main thread.

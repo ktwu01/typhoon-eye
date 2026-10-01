@@ -2,6 +2,10 @@ const STRINGS = {
   en: {
     title: 'Typhoon Eye · Waterspouts',
     loading: 'The storm is forming…',
+    ready: 'The storm is ready.',
+    soundPrompt: 'Play with sound?',
+    soundOn: 'Sound on',
+    soundOff: 'Sound off',
     language: 'Language',
     timeOfDay: 'Time (noon → dusk)',
     sunAzimuth: 'Sun direction',
@@ -25,6 +29,10 @@ const STRINGS = {
   zh: {
     title: '台风眼 · 龙吸水',
     loading: '风暴正在成形…',
+    ready: '风暴已就绪。',
+    soundPrompt: '要开启声音吗？',
+    soundOn: '开启声音',
+    soundOff: '关闭声音',
     language: '语言',
     timeOfDay: '时间 (正午 → 黄昏)',
     sunAzimuth: '太阳方位',
@@ -75,8 +83,7 @@ export function t(key) {
 function applyDocument() {
   document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
   document.title = t('title');
-  const loading = document.getElementById('loading');
-  if (loading) loading.textContent = t('loading');
+  for (const el of document.querySelectorAll('[data-i18n]')) el.textContent = t(el.dataset.i18n);
 }
 
 export function setLang(next) {

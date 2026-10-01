@@ -1,6 +1,6 @@
 import { onLangChange, t } from './i18n.js';
 
-export function createAudioControls(audio) {
+export function createAudioControls(audio, container) {
   const panel = document.createElement('section');
   panel.className = 'audio-controls';
   panel.innerHTML = `
@@ -12,7 +12,7 @@ export function createAudioControls(audio) {
     </label>
     <p class="audio-status" role="status" aria-live="polite" hidden></p>
   `;
-  document.body.appendChild(panel);
+  container.appendChild(panel);
 
   const button = panel.querySelector('button');
   const volume = panel.querySelector('input');
