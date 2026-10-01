@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>台风眼 · 龙吸水</title>
+    <style>
+      html, body { margin: 0; height: 100%; overflow: hidden; background: #05080c; }
+      canvas { display: block; cursor: grab; }
+      canvas:active { cursor: grabbing; }
+      #loading {
+        position: fixed; inset: 0; display: grid; place-items: center;
+        color: #9fb3c8; font: 15px/1.4 -apple-system, "PingFang SC", sans-serif; letter-spacing: 0.2em;
+        transition: opacity 0.8s;
+      }
+      #loading.done { opacity: 0; pointer-events: none; }
+    </style>
+  </head>
+  <body>
+    <div id="loading">风暴正在成形…</div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
