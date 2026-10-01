@@ -1,0 +1,20 @@
+# 台风眼 · 龙吸水
+
+A real-time WebGL scene of waterspouts over a storm sea inside a typhoon eye, built with three.js.
+
+**Live:** https://ktwu01.github.io/typhoon-eye/
+
+- The eyewall, eye clouds and the spinning clouds the waterspouts hang from are volumetric raymarched clouds, accumulated over frames to remove noise.
+- The sea is a sum of Gerstner waves from several swell directions, with foam where crests fold.
+- The waterspouts are raymarched volumes with a twisting funnel and a spray sheath at the sea surface.
+
+Drag to look around, scroll to zoom. The panel controls time of day, sun direction, wind, storm spin, number of waterspouts, low clouds, lightning and ship sway. Any setting can go in the URL, e.g. `?timeOfDay=0.95&sunAzimuth=-60&spouts=1&hideControls`.
+
+## Run locally
+
+```sh
+npm install
+npm run dev
+```
+
+Reference photos and their licenses are listed in [refs/SOURCES.md](refs/SOURCES.md).
