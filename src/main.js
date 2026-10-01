@@ -31,6 +31,7 @@ function start() {
   scene.add(clouds.backdrop, ocean.mesh, spouts.group);
 
   const audio = createStormAudio(spouts.group.children.map((mesh) => mesh.position));
+  void audio.enable();
   createAudioControls(audio);
   const lightning = createLightning(shared, audio.strike);
   const look = createLookControls(camera, renderer.domElement, { yaw: 0.06, pitch: 0.3 });

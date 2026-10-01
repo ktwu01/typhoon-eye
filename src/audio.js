@@ -180,13 +180,15 @@ export function createStormAudio(spoutPositions) {
         context.onstatechange = notify;
         build();
       }
-      await context.resume();
       enabled = true;
       failed = false;
       applyVolume();
+      // Autoplay may leave resume() pending until a gesture; controls must stay usable.
+      notify();
+      await context.resume();
       if (document.hidden) await context.suspend();
-    } catch {
-      failed = true;
+    } catch (error) {
+      failed = error.name !== 'NotAllowedError';
     }
     notify();
   }
