@@ -36,8 +36,6 @@ function start() {
   scene.add(clouds.backdrop, ocean.mesh, spouts.group);
 
   spoutPositions.push(...spouts.group.children.map((mesh) => mesh.position));
-  const hud = document.getElementById('hud');
-  createAudioControls(audio, hud);
   const lightning = createLightning(shared, audio.strike);
   const look = createLookControls(camera, renderer.domElement, { yaw: 0.06, pitch: 0.3 });
   const post = createPost(renderer, scene, camera);
@@ -51,7 +49,8 @@ function start() {
     spouts.setCount(params.spouts);
     renderer.toneMappingExposure = params.exposure;
   }
-  createGui(applyParams, hud);
+  const gui = createGui(applyParams);
+  createAudioControls(audio, gui);
   applyParams();
 
   function resize() {

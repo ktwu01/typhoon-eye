@@ -51,38 +51,7 @@
         .loading-choices [data-sound="on"] { animation: none; box-shadow: 0 0 18px #8fd0ff88; }
       }
       .loading-choices button:focus-visible { outline: 2px solid #c4e7ff; outline-offset: 3px; }
-      #hud {
-        position: fixed; z-index: 10;
-        top: max(12px, env(safe-area-inset-top)); right: max(12px, env(safe-area-inset-right));
-        display: flex; flex-direction: column; align-items: flex-end; gap: 8px;
-        max-width: calc(100vw - 24px); max-height: calc(100vh - 24px);
-      }
-      #hud .lil-gui.root { max-height: calc(100vh - 110px); overflow-y: auto; }
-      .audio-controls {
-        display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px;
-        box-sizing: border-box; max-width: 100%; padding: 8px;
-        border: 1px solid #50616e; border-radius: 10px;
-        background: #071019e6; color: #e5edf3; backdrop-filter: blur(10px);
-        font: 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      }
-      .audio-toggle {
-        min-width: 112px; min-height: 40px; padding: 8px 12px;
-        border: 1px solid #778d9c; border-radius: 6px;
-        background: #213544; color: inherit; font: inherit; cursor: pointer;
-      }
-      .audio-toggle:hover { background: #304b60; }
-      .audio-toggle:disabled { opacity: 0.65; cursor: default; }
-      .audio-toggle:focus-visible, .audio-volume input:focus-visible {
-        outline: 2px solid #c4e7ff; outline-offset: 3px;
-      }
-      .audio-volume { display: flex; align-items: center; gap: 8px; min-height: 40px; }
-      .audio-volume input { width: 88px; height: 28px; margin: 0; accent-color: #b1d4ee; cursor: pointer; }
-      .audio-volume output { min-width: 4ch; font-variant-numeric: tabular-nums; }
-      .audio-status { flex-basis: 100%; margin: 0 4px 2px; color: #e0c39e; }
-      @media (max-width: 420px) {
-        .audio-controls { gap: 6px 10px; }
-        .audio-volume input { width: 70px; }
-      }
+      .audio-status { margin: 0; padding: 4px 8px 6px; color: #e0c39e; font-size: 11px; line-height: 1.4; }
     </style>
   </head>
   <body>
@@ -100,7 +69,6 @@
         </div>
       </div>
     </div>
-    <div id="hud"></div>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

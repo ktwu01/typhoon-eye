@@ -23,9 +23,9 @@ function readUrlPreset() {
   }
 }
 
-export function createGui(onChange, container) {
+export function createGui(onChange) {
   readUrlPreset();
-  const gui = new GUI({ title: t('title'), container });
+  const gui = new GUI({ title: t('title') });
   const ui = { lang: getLang() };
   const langControl = gui.add(ui, 'lang', LANGUAGES).onChange(setLang);
   const controls = {
