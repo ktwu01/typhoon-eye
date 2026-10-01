@@ -1,4 +1,5 @@
 import GUI from 'lil-gui';
+import { LANGUAGES, getLang, onLangChange, setLang, t } from './i18n.js';
 
 export const params = {
   timeOfDay: 0.5,
@@ -24,16 +25,30 @@ function readUrlPreset() {
 
 export function createGui(onChange) {
   readUrlPreset();
-  const gui = new GUI({ title: '台风眼 · 龙吸水' });
-  gui.add(params, 'timeOfDay', 0, 1, 0.01).name('时间 (正午 → 黄昏)').onChange(onChange);
-  gui.add(params, 'sunAzimuth', -180, 180, 1).name('太阳方位').onChange(onChange);
-  gui.add(params, 'wind', 0.4, 1.6, 0.01).name('风浪').onChange(onChange);
-  gui.add(params, 'spin', 0, 4, 0.05).name('风暴旋转').onChange(onChange);
-  gui.add(params, 'spouts', 0, 3, 1).name('龙吸水数量').onChange(onChange);
-  gui.add(params, 'lowClouds', 0, 0.8, 0.01).name('低云').onChange(onChange);
-  gui.add(params, 'lightning').name('闪电').onChange(onChange);
-  gui.add(params, 'sway').name('船身摇晃').onChange(onChange);
-  gui.add(params, 'exposure', 0.4, 2, 0.01).name('曝光').onChange(onChange);
+  const gui = new GUI({ title: t('title') });
+  const ui = { lang: getLang() };
+  const langControl = gui.add(ui, 'lang', LANGUAGES).onChange(setLang);
+  const controls = {
+    timeOfDay: gui.add(params, 'timeOfDay', 0, 1, 0.01),
+    sunAzimuth: gui.add(params, 'sunAzimuth', -180, 180, 1),
+    wind: gui.add(params, 'wind', 0.4, 1.6, 0.01),
+    spin: gui.add(params, 'spin', 0, 4, 0.05),
+    spouts: gui.add(params, 'spouts', 0, 3, 1),
+    lowClouds: gui.add(params, 'lowClouds', 0, 0.8, 0.01),
+    lightning: gui.add(params, 'lightning'),
+    sway: gui.add(params, 'sway'),
+    exposure: gui.add(params, 'exposure', 0.4, 2, 0.01),
+  };
+  for (const control of Object.values(controls)) control.onChange(onChange);
+
+  function applyLabels() {
+    gui.title(t('title'));
+    langControl.name(t('language'));
+    for (const [key, control] of Object.entries(controls)) control.name(t(key));
+  }
+  applyLabels();
+  onLangChange(applyLabels);
+
   if (window.innerWidth < 700 || new URLSearchParams(window.location.search).has('hideControls')) gui.close();
   return gui;
 }
