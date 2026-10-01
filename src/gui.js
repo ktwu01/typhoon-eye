@@ -2,15 +2,15 @@ import GUI from 'lil-gui';
 import { LANGUAGES, getLang, onLangChange, setLang, t } from './i18n.js';
 
 export const params = {
-  timeOfDay: 0.5,
-  sunAzimuth: -80,
-  wind: 1.0,
-  spin: 1.0,
+  timeOfDay: 0.61,
+  sunAzimuth: -63,
+  wind: 1.6,
+  spin: 4,
   spouts: 3,
-  lowClouds: 0.15,
+  lowClouds: 0.8,
   lightning: true,
   sway: true,
-  exposure: 0.9,
+  exposure: 0.4,
 };
 
 // Presets can be shared as URL query parameters, e.g. ?timeOfDay=0.8&spouts=1
