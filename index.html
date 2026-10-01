@@ -21,13 +21,35 @@
       .loading-card p { margin: 0; letter-spacing: 0.2em; }
       #loading-prompt { margin-top: 18px; color: #e5edf3; letter-spacing: 0.05em; }
       .loading-choices { display: flex; gap: 12px; }
+      .loading-choices { align-items: center; }
       .loading-choices button {
         min-width: 120px; min-height: 44px; padding: 10px 16px;
         border: 1px solid #778d9c; border-radius: 6px;
         background: #213544; color: #e5edf3; font: inherit; cursor: pointer;
+        transition: background-color 0.2s, opacity 0.2s, box-shadow 0.2s;
       }
-      .loading-choices button:hover { background: #304b60; }
-      .loading-choices button[aria-pressed="true"] { background: #b1d4ee; border-color: #b1d4ee; color: #071019; }
+      .loading-choices [data-sound="on"] {
+        display: grid; gap: 2px; min-width: 150px; min-height: 56px;
+        border-color: #c4e7ff; background: #2f5470;
+        animation: shine 2.4s ease-in-out infinite;
+      }
+      .loading-choices [data-sound="on"]:hover { background: #3b6a8c; }
+      .loading-choices .badge {
+        color: #ffe2a8; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+      }
+      .loading-choices [data-sound="off"] {
+        border-color: #3a4954; background: transparent; color: #8a9aa6; opacity: 0.6;
+      }
+      .loading-choices [data-sound="off"]:hover { opacity: 0.9; }
+      .loading-choices button[aria-pressed="true"] { background: #b1d4ee; border-color: #b1d4ee; color: #071019; opacity: 1; }
+      .loading-choices button[aria-pressed="true"] .badge { color: #6b4a10; }
+      @keyframes shine {
+        0%, 100% { box-shadow: 0 0 10px #8fd0ff55, 0 0 0 #8fd0ff00; }
+        50% { box-shadow: 0 0 22px #8fd0ffaa, 0 0 44px #8fd0ff44; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .loading-choices [data-sound="on"] { animation: none; box-shadow: 0 0 18px #8fd0ff88; }
+      }
       .loading-choices button:focus-visible { outline: 2px solid #c4e7ff; outline-offset: 3px; }
       #hud {
         position: fixed; z-index: 10;
@@ -70,8 +92,11 @@
         <p id="loading-status" role="status" data-i18n="loading">The storm is forming…</p>
         <p id="loading-prompt" data-i18n="soundPrompt">Play with sound?</p>
         <div class="loading-choices">
-          <button type="button" data-sound="on" aria-pressed="false" data-i18n="soundOn">Sound on</button>
-          <button type="button" data-sound="off" aria-pressed="false" data-i18n="soundOff">Sound off</button>
+          <button type="button" data-sound="on" aria-pressed="false">
+            <span data-i18n="soundOn">Sound on</span>
+            <span class="badge" data-i18n="recommended">Recommended</span>
+          </button>
+          <button type="button" data-sound="off" aria-pressed="false"><span data-i18n="soundOff">Sound off</span></button>
         </div>
       </div>
     </div>
