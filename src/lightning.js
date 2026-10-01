@@ -1,5 +1,5 @@
 // Flashes buried inside the eyewall: a few rapid flickers, then a random pause.
-export function createLightning(shared) {
+export function createLightning(shared, onStrike = () => {}) {
   const flash = shared.uFlash.value;
   const center = shared.uStormCenter.value;
   let wait = 3;
@@ -13,6 +13,7 @@ export function createLightning(shared) {
     flash.x = center.x + Math.cos(angle) * radius;
     flash.y = 1500 + Math.random() * 7000;
     flash.z = center.z + Math.sin(angle) * radius;
+    onStrike(flash);
     pulses = [];
     let t = 0;
     const n = 2 + Math.floor(Math.random() * 3);

@@ -8,6 +8,8 @@ import { createLightning } from './lightning.js';
 import { createLookControls } from './look-controls.js';
 import { createPost } from './post.js';
 import { createGui, params } from './gui.js';
+import { createStormAudio } from './audio.js';
+import { createAudioControls } from './audio-controls.js';
 
 function start() {
   const renderer = new THREE.WebGLRenderer({ antialias: false, powerPreference: 'high-performance' });
@@ -28,7 +30,9 @@ function start() {
   clouds.uniforms.uSpouts.value = spouts.anchors;
   scene.add(clouds.backdrop, ocean.mesh, spouts.group);
 
-  const lightning = createLightning(shared);
+  const audio = createStormAudio(spouts.group.children.map((mesh) => mesh.position));
+  createAudioControls(audio);
+  const lightning = createLightning(shared, audio.strike);
   const look = createLookControls(camera, renderer.domElement, { yaw: 0.06, pitch: 0.3 });
   const post = createPost(renderer, scene, camera);
 
@@ -67,6 +71,7 @@ function start() {
     shared.uTime.value = time;
 
     look.update(dt, time, params.sway);
+    audio.update(params, camera, time);
     lightning.update(dt, params.lightning);
     ocean.update(camera);
     clouds.render(camera);

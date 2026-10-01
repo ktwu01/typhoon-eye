@@ -14,6 +14,33 @@
         transition: opacity 0.8s;
       }
       #loading.done { opacity: 0; pointer-events: none; }
+      .audio-controls {
+        position: fixed; left: max(16px, env(safe-area-inset-left));
+        bottom: max(16px, env(safe-area-inset-bottom)); z-index: 10;
+        display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px;
+        box-sizing: border-box; max-width: calc(100vw - 32px); padding: 8px;
+        border: 1px solid #50616e; border-radius: 10px;
+        background: #071019e6; color: #e5edf3; backdrop-filter: blur(10px);
+        font: 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      .audio-toggle {
+        min-width: 112px; min-height: 40px; padding: 8px 12px;
+        border: 1px solid #778d9c; border-radius: 6px;
+        background: #213544; color: inherit; font: inherit; cursor: pointer;
+      }
+      .audio-toggle:hover { background: #304b60; }
+      .audio-toggle:disabled { opacity: 0.65; cursor: default; }
+      .audio-toggle:focus-visible, .audio-volume input:focus-visible {
+        outline: 2px solid #c4e7ff; outline-offset: 3px;
+      }
+      .audio-volume { display: flex; align-items: center; gap: 8px; min-height: 40px; }
+      .audio-volume input { width: 88px; height: 28px; margin: 0; accent-color: #b1d4ee; cursor: pointer; }
+      .audio-volume output { min-width: 4ch; font-variant-numeric: tabular-nums; }
+      .audio-status { flex-basis: 100%; margin: 0 4px 2px; color: #e0c39e; }
+      @media (max-width: 420px) {
+        .audio-controls { gap: 6px 10px; }
+        .audio-volume input { width: 70px; }
+      }
     </style>
   </head>
   <body>

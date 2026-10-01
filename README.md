@@ -10,6 +10,8 @@ A real-time WebGL scene of waterspouts over a storm sea inside a typhoon eye, bu
 
 Drag to look around, scroll to zoom. The panel controls time of day, sun direction, wind, storm spin, number of waterspouts, low clouds, lightning and ship sway. Any setting can go in the URL, e.g. `?timeOfDay=0.95&sunAzimuth=-60&spouts=1&hideControls`.
 
+Click **Enable sound** for a procedural storm soundscape: directional waterspout roars, wind lulls, hull impacts, creaking metal, and delayed thunder tied to lightning. Mute and volume are available at the bottom left; preferences are remembered. Audio pauses while the tab is hidden. All sounds are synthesized locally with Web Audio, with no audio downloads or extra dependencies.
+
 ## Run locally
 
 ```sh
